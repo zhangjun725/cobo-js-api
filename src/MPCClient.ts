@@ -596,8 +596,56 @@ export class MPCClient {
         return this.coboFetch("GET","/v1/custody/mpc/get_approval_details/", params)
     }
 
+    ListEligibles = (status?: string, min_id?: string, limit?: number) => {
+        let params: any = {}
+        
+        if (!!status) {
+            params["status"] = status
+        }
+        if (!!min_id) {
+            params["min_id"] = min_id 
+        }
+        if (!!limit) {
+            params["limit"] = limit
+        }
 
-    
+        return this.coboFetch("GET", "/v1/custody/mpc/babylon/airdrops/list_eligibles/", params)
+    }
+
+    SubmitRegistration = (btc_address: string, babylon_address: string) => {
+        let params: any = {
+            "btc_address": btc_address,
+            "babylon_address": babylon_address
+        }
+        return this.coboFetch("POST", "/v1/custody/mpc/babylon/airdrops/submit_registration/", params)
+    }
+
+    ListRegistrations = (status?: string, btc_address?: string, min_id?: string, limit?: number) => {
+        let params: any = {}
+        
+        if (!!status) {
+            params["status"] = status
+        }
+        if (!!btc_address) {
+            params["btc_address"] = btc_address
+        }
+        if (!!min_id) {
+            params["min_id"] = min_id
+        }
+        if (!!limit) {
+            params["limit"] = limit
+        }
+
+        return this.coboFetch("GET", "/v1/custody/mpc/babylon/airdrops/list_registrations/", params)
+    }
+
+    GetRegistration = (registration_id: string) => {
+        let params: any = {
+            "registration_id": registration_id
+        }
+        return this.coboFetch("GET", "/v1/custody/mpc/babylon/airdrops/get_registration/", params)
+    }
+
     coboFetch = async (method: string, path: string, params: any): Promise<ApiResponse> => {
         let nonce = String(new Date().getTime());
         let sort_params = Object.keys(params).sort().map((k) => {
