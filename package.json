@@ -37,8 +37,8 @@
   "dependencies": {
     "bip66": "1.1.5",
     "node-fetch": "2.6.7",
-    "secp256k1": "4.0.2",
-    "sha256": "0.2.0"
+    "sha256": "0.2.0",
+    "elliptic": "6.6.1"
   },
   "engines": {
     "node": ">=10.18.0"
